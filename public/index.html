@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <title>Stock Portfolio</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <h2>Stock Portfolio</h2>
+    </div>
+  </div>
+  <div id="app" class="content">
+    <section class="image-gallery">
+      <div class="image" v-for="item in items">
+        <p>{{item.ticker}}: ${{item.amount}}</p>
+      </div>
+      <div class="add">
+        <div class="form">
+          <input v-model="ticker" placeholder="Stock Ticker">
+          <input v-model="amount" placeholder="Amount">
+          <button @click="upload">Add</button>
+        </div>
+      </div>
+      <hr>
+      <div class="heading">
+        <h4>Edit or Delete a Stock:</h4>
+      </div>
+      <div class="edit">
+        <div class="form">
+          <input v-model="findTitle" placeholder="Search">
+          <div class="suggestions" v-if="suggestions.length > 0">
+            <div class="suggestion" v-for="s in suggestions" @click="selectItem(s)">{{s.ticker}}
+            </div>
+          </div>
+        </div>
+        <div class="upload" v-if="findItem">
+          <input v-model="findItem.ticker">
+          <p></p>
+          <input v-model="findItem.amount">
+          <p></p>
+        </div>
+        <div class="actions" v-if="findItem">
+          <button @click="deleteItem(findItem)">Delete</button>
+          <button @click="editItem(findItem)">Edit</button>
+        </div>
+      </div>
+  </div>
+
+  <footer class="gitHubfooter">
+    <a href="https://github.com/" rel="noopener noreferrer" target="_blank">Created by Ryan Rodeback</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+  <script src="/script.js"></script>
+</body>
+
+</html>
